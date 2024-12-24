@@ -53,7 +53,6 @@ function Search_product() {
                                     className='w-80 h-40  object-contain transition-transform transform hover:scale-110'
                                 />
                                 <p className='text-xl  text-red-600'>Product Not found ! . . .</p>
-                                {/* <img src="https://sayrug.com/bitrix/templates/mav/images/no-product.png" alt="" /> */}
 
                             </div>
                         )}
