@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Cards from './Cards';
+import Loading from './Loading';
 
 function Search_product() {
     const [products, setProducts] = useState([]);
     const [serchProduct, setSearchProduct] = useState([]);
+    const [loading,setLoading] = useState(true);
 
     const { term } = useParams(); // get the search term from the URL
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:4001/getproduct/get');
+                setLoading(true);
+                const res = await axios.get('https://e-commerce-website-1p3g.onrender.com/getproduct/get');
                 // console.log(res.data);
                 setProducts(res.data);
+                setLoading(false);
             } catch (error) {
                 console.log(error);
             }
@@ -36,6 +40,9 @@ function Search_product() {
         <>
         
             <div className='max-w-screen-2xl container mx-auto md:px-20 px-4 mt-2 min-h-96  bg-white shadow-xl'>
+               {loading ? (
+                <Loading/>
+               ):(
                 <div className='grid grid-cols-1 md:grid-cols-4 gap-3 p-10'>
                     {
                         serchProduct?.length > 0 ? (
@@ -52,11 +59,12 @@ function Search_product() {
                                     alt=""
                                     className='w-80 h-40  object-contain transition-transform transform hover:scale-110'
                                 />
-                                <p className='text-xl  text-red-600'>Product Not found ! . . .</p>
+                                <p className='text-md md:text-xl  text-red-600'>Product Not found ! . . .</p>
 
                             </div>
                         )}
                 </div>
+                )}
             </div >
         </>
 

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../../src/components/cart_data/CartContext.jsx';  // Import the useCart hook
-
+import Loading from '../components/Loading.jsx'
 //Add toaster
-import { ToastContainer, toast,Bounce } from 'react-toastify';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Product_Details() {
@@ -12,12 +12,15 @@ function Product_Details() {
     const [product, setProduct] = useState({});
     const { dispatch } = useCart();  // Get the dispatch function from CartContext
 
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
-                const res = await axios.get('http://localhost:4001/getproduct/get');
+                setLoading(true);
+                const res = await axios.get('https://e-commerce-website-1p3g.onrender.com/getproduct/get');
                 const productDetails = res.data.find((data) => data._id === id);
                 setProduct(productDetails);
+                setLoading(false);
             } catch (error) {
                 console.log(error);
             }
@@ -46,7 +49,7 @@ function Product_Details() {
             progress: undefined,
             theme: "dark",
             transition: Bounce,
-            });
+        });
     };
 
     return (
@@ -55,13 +58,19 @@ function Product_Details() {
                 {product.name}
             </h1>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2 mt-10 pb-20">
-                <div className="flex justify-center">
-                    <img
-                        src={product.image}
-                        alt={product.name}
-                        className="bg-white px-3 rounded-2xl shadow-2xl object-contain w-[300px] h-[300px] transition-transform transform hover:scale-110"
-                    />
-                </div>
+                {loading ? (
+                    <div className='flex  justify-center items-center'>
+                        <Loading /> <p>Image loading</p>
+                    </div>
+                ) : (
+                    <div className="flex justify-center">
+                        <img
+                            src={product.image}
+                            alt={product.name}
+                            className="bg-white px-3 rounded-2xl shadow-2xl object-contain w-[300px] h-[300px] transition-transform transform hover:scale-110"
+                        />
+                    </div>
+                )}
                 <div className="p-10 gap-3 mb-5 rounded-2xl shadow-2xl bg-indigo-950 text-white">
                     <p><span className="font-semibold">Model Name :- </span>{product.name}</p><hr className="mt-2" /><br />
                     <p><span className="font-semibold">Description :- </span>{product.description}</p><hr /><br />

@@ -8,7 +8,7 @@ function Laptops() {
     useEffect(() => {
         const adminData = async () => {
             try {
-                const res = await axios.get('http://localhost:4001/getproduct/get');
+                const res = await axios.get('https://e-commerce-website-1p3g.onrender.com/getproduct/get');
                 console.log(res.data);
                 const mobilesData = res.data.filter((data) => data.category === "laptop");
 
@@ -25,7 +25,7 @@ function Laptops() {
 
     return (
         <>
-            <div className='max-w-screen-2xl container mx-auto md:px-20 px-4 m-3 bg-white  h-[100vh]'>
+            <div className='max-w-screen-2xl container mx-auto md:px-20 px-4 m-3 bg-white   min-h-96'>
                 <h1 className=' text-2xl font-semibold text-center md:text-3xl underline text-blue-900 p-2'>Laptops</h1>
                 <div className='grid grid-cols-1 md:grid-cols-4 gap-10 '>
                     {product.map((item) => (

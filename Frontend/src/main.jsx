@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { StrictMode,Suspense, lazy  } from 'react'
+import { StrictMode, Suspense, lazy } from 'react'
 
 import Layout from './components/layout_Website/Layout.jsx'
 import Carousel from './components/Carousel.jsx'
@@ -16,7 +16,7 @@ import Cart_Data from './components/cart_data/Cart_Data.jsx'
 import Search_product from './components/Search_product.jsx'
 import Product_Details from './components/Product_Details.jsx'
 import Mens_Women_cards from './components/fashion\'s/Mens_Women_cards.jsx'
-import Mobiles from './components/category_Filter_Products/Mobiles.jsx'
+
 import Laptops from './components/category_Filter_Products/Laptops.jsx'
 import Perfumes from './components/category_Filter_Products/Perfumes.jsx'
 import About_page from './components/About_page.jsx'
@@ -25,12 +25,13 @@ import Protecte_Route from './components/Protecte_Route.jsx'
 import Watches from './components/category_Filter_Products/Watch.jsx'
 import Mens_Fashion from './components/fashion\'s/Mens_Fashion.jsx'
 import Womens_Fashion from './components/fashion\'s/Womens_Fashion.jsx'
-import All_Fashion_pro from './components/fashion\'s/All_Fashion_pro.jsx'
 import Cycle from './components/category_Filter_Products/Cycle.jsx'
 import Books from './components/category_Filter_Products/Books.jsx'
 import Loader from './components/Loader.jsx'
-
+import Loading from './components/Loading.jsx'
 // LazyLoader
+let LazyAll_Fashion_pro = lazy(() => import('./components/fashion\'s/All_Fashion_pro.jsx'));
+let LazyMobiles = lazy(() => import('./components/category_Filter_Products/Mobiles.jsx'))
 let LazyHome = lazy(() => import('./components/home/Home.jsx'));
 let LazyAdmin = lazy(() => import('./components/admin_Products/Admin_Data.jsx'))
 //Routing 
@@ -43,7 +44,7 @@ const route = createBrowserRouter(
         {
           path: '/',
           element:
-            <Suspense fallback={<Loader/>}>
+            <Suspense fallback={<Loader />}>
               <LazyHome />
             </Suspense>,
         },
@@ -57,10 +58,10 @@ const route = createBrowserRouter(
         },
         {
           path: '/admin_data',
-          element: 
-          <Suspense fallback={<Loader/>}>
-           <Protecte_Route Component={LazyAdmin} />   {/* // Protect Admin Data route */}
-        </Suspense>,                                   
+          element:
+            <Suspense fallback={<Loader />}>
+              <Protecte_Route Component={LazyAdmin} />   {/* // Protect Admin Data route */}
+            </Suspense>,
         },
         {
           path: '/add_products',
@@ -72,7 +73,7 @@ const route = createBrowserRouter(
         },
         {
           path: '/carousel',
-          element: <Carousel/>,
+          element: <Carousel />,
         },
         {
           path: '/best_electronics_cards',
@@ -84,7 +85,10 @@ const route = createBrowserRouter(
         },
         {
           path: '/mobiles',
-          element: <Mobiles />,
+          element:
+            <Suspense fallback = {<h1>Loading</h1>}>
+              <LazyMobiles />
+            </Suspense>,
         },
         {
           path: '/laptops',
@@ -108,7 +112,10 @@ const route = createBrowserRouter(
         },
         {
           path: '/all_Fashion_pro',
-          element: <All_Fashion_pro />
+          element: 
+          <Suspense fallback = {<h1>Loading.....</h1>}>
+            <LazyAll_Fashion_pro/>
+          </Suspense>
         },
 
         {
@@ -144,6 +151,10 @@ const route = createBrowserRouter(
           element: <Loader />,
         },
         {
+         path :'/loading',
+         element : <Loading/>
+        },
+        {
           path: '/contact',
           element: <Contact />,
         },
@@ -158,7 +169,7 @@ const route = createBrowserRouter(
 )
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <RouterProvider router={route}></RouterProvider>
-  </StrictMode>,
+  // </StrictMode>,
 )

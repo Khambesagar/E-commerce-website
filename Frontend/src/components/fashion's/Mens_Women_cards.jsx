@@ -30,7 +30,7 @@ function Mens_Women_cards() {
     useEffect(() => {
         const fashionDataW = async () => {
             try {
-                const res = await axios.get('http://localhost:4001/getproduct/get');
+                const res = await axios.get('https://e-commerce-website-1p3g.onrender.com/getproduct/get');
                 const fdata = res.data.filter((data) => data.category === "Fashion-Women's");
                 console.log(fdata);
                 setWproduct(fdata);

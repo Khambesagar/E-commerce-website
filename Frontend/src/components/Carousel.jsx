@@ -24,7 +24,7 @@ function Carousel() {
     };
     return (
         <>
-            <div className=" shadow-md">
+            <div className="hidden md:block shadow-md">
                 <div className="slider-container w-full h-32 md:h-52 mt-2 bg-white overflow-hidden  shadow-md">
                     <Slider {...settings}>
                         {/* First slide */}
@@ -33,10 +33,10 @@ function Carousel() {
                                 <div>
                                     <div className="relative ">
                                         <img src={banner1} alt="Banner" className="w-full h-full object-contain bg-black bg-opacity-50" />
-                                        <p className="absolute md:top-8  md:right-72 text-center flex items-center justify-center text-red-400 text-2xl ">
+                                        <p className="hidden xl:block absolute md:top-8  md:right-72 text-center flex items-center justify-center text-red-400 text-2xl ">
                                             fastrack watches for men <br /> Up to 20% Discount <br />buy Now.....🖐
                                         </p>
-                                        <img src={watch} alt="" className="absolute top-3 right-2 md:top-10 md:right-40 flex items-center justify-center md:w-32 md:h-32 w-20 h-20" />
+                                        <img src={watch} alt="" className="absolute top-3 right-2 md:top-10 md:right-10 lg:right-40 flex items-center justify-center md:w-32 md:h-32 w-20 h-20" />
                                     </div>
 
                                 </div>

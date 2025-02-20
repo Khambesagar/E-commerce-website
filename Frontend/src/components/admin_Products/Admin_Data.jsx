@@ -37,7 +37,7 @@ function Admin_Data() {
 
         if (confirmation) {
             try {
-                const res = await axios.delete(`http://localhost:4001/delete/${id}`);
+                const res = await axios.delete(`https://e-commerce-website-1p3g.onrender.com/delete/${id}`);
 
                 console.log(res.data);  // Log the response
                 // alert('Product deleted successfully') 

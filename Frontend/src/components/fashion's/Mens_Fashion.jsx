@@ -9,7 +9,7 @@ function Mens_Fashion() {
     useEffect(() => {
         const fashionData = async () => {
             try {
-                const res = await axios.get('http://localhost:4001/getproduct/get');
+                const res = await axios.get('https://e-commerce-website-1p3g.onrender.com/getproduct/get');
                 const fdata = res.data.filter((data) => data.category === "Fashion-men's");
                 console.log(fdata);
                 setProduct(fdata);

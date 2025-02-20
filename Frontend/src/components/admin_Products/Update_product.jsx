@@ -26,7 +26,7 @@ function Update_product() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await axios.get(`http://localhost:4001/getproduct/${id}`);
+                const res = await axios.get(`https://e-commerce-website-1p3g.onrender.com/getproduct/${id}`);
      
                 setInputData(res.data);
             } catch (error) {

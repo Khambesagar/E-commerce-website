@@ -3,17 +3,19 @@ import axios from 'axios';
 
 import Cards from './Cards'
 import { NavLink } from 'react-router-dom';
+import Loading from './Loading';
 
 function Show_all_products() {
   const [data, setData] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get('http://localhost:4001/getproduct/get');
+        setLoading(true);
+        const res = await axios.get('https://e-commerce-website-1p3g.onrender.com/getproduct/get');
         // console.log(res.data);
         setData(res.data);
-
+        setLoading(false)
       } catch (error) {
         console.log(error);
 
@@ -29,15 +31,17 @@ function Show_all_products() {
         <div>
           <h1 className='pt-3 md:text-xl font-bold'>Best for You & More</h1>
         </div>
-
-        <div className='grid grid-cols-1 md:grid-cols-6 gap-5'>
-          {data.map((item) => (
-            <NavLink to={`/Product_Details/${item._id}`}>
-              <Cards  key={item._id} items={item}/>
-            </NavLink>
-          ))}
-        </div>
-
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className='grid grid-cols-1 md:grid-cols-6 gap-5'>
+            {data.map((item) => (
+              <NavLink to={`/Product_Details/${item._id}`}>
+                <Cards key={item._id} items={item} />
+              </NavLink>
+            ))}
+          </div>
+        )}
         <div>
 
         </div>

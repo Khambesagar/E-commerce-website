@@ -85,7 +85,7 @@ function Add_products() {
     useEffect(() => {
         const recieveData = async () => {
             try {
-                const res = await axios.post('http://localhost:4001/addproduct/add');
+                const res = await axios.post('https://e-commerce-website-1p3g.onrender.com/addproduct/add');
                 console.log(res.data);
                 setAddData(res.data);
 
